@@ -1,6 +1,7 @@
 package br.ufc.stock.seller;
 
 import br.ufc.stock.Item;
+import br.ufc.stock.Request;
 import br.ufc.stock.Stock;
 import br.ufc.stock.sale.Sale;
 import br.ufc.store.StoreRequester;
@@ -14,8 +15,11 @@ public abstract class BaseSeller implements Seller{
 
     public Sale sell(int amount){
         BigDecimal price = this.price(amount);
-
-        //...
+        Request req = new Request(price);
+        this.requester.credit(req);
+        if(req.isConcluded()){
+            stock.decreaseAmount(amount);
+        }
 
         return null;
     }

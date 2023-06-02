@@ -27,4 +27,8 @@ public class Request {
         }
     }
 
+    public boolean isConcluded(){
+        return this.status.equals(RequestStatus.CONCLUDED);
+    }
+
 }
