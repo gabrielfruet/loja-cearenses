@@ -6,8 +6,8 @@ import br.ufc.store.StoreRequester;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class DiscountSeller extends BaseSeller implements Serializable {
-    public DiscountSeller(Stock stock, BigDecimal price, StoreRequester requester){
+public class CommonSeller extends BaseSeller implements Serializable {
+    public CommonSeller(Stock stock, BigDecimal price, StoreRequester requester){
         this.stock = stock;
         this.price = price;
         this.requester = requester;
@@ -15,7 +15,8 @@ public class DiscountSeller extends BaseSeller implements Serializable {
 
     @Override
     public BigDecimal price(int amount) {
-        return null;
+        return this.price.multiply(
+                new BigDecimal(amount)
+        );
     }
-
 }
