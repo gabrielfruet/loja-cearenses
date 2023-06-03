@@ -6,6 +6,7 @@ import br.ufc.stock.seller.manager.exception.ExistentSellerException;
 
 import java.util.Optional;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class SellerManager {
     private Vector<Seller> sellers;
@@ -40,6 +41,11 @@ public class SellerManager {
     }
 
     public Vector<Item> getProducts(){
-        return null;
+        return new Vector(
+                this.sellers
+                        .stream()
+                        .map(Seller::getItemType)
+                        .collect(Collectors.toList())
+        );
     }
 }
