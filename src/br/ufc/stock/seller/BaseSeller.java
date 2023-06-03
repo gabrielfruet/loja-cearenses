@@ -11,13 +11,26 @@ import br.ufc.store.StoreRequester;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public abstract class BaseSeller implements Seller{
+/**
+ * An abstract base class for implementing sellers.
+ *
+ * @author Gabriel Fruet
+ */
+public abstract class BaseSeller implements Seller {
     protected Stock stock;
     protected BigDecimal price;
     protected StoreRequester requester;
 
+    /**
+     * Sells a specified amount of items.
+     *
+     * @param amount the amount of items to sell
+     * @return a Sale object representing the sale
+     * @throws SellerNegativeAmountException if the amount is negative
+     * @throws CreditRequestException        if the credit request is not concluded
+     */
     public Sale sell(int amount) throws SellerNegativeAmountException {
-        if(amount < 0){
+        if (amount < 0) {
             throw new SellerNegativeAmountException(amount);
         }
 
@@ -26,7 +39,7 @@ public abstract class BaseSeller implements Seller{
 
         this.requester.credit(req);
 
-        if(!req.isConcluded()){
+        if (!req.isConcluded()) {
             throw new CreditRequestException(req);
         }
 
@@ -40,6 +53,13 @@ public abstract class BaseSeller implements Seller{
         );
     }
 
+    /**
+     * Calculates the price for a specified amount of items.
+     *
+     * @param amount the amount of items
+     * @return the price for the specified amount of items
+     * @throws SellerNegativeAmountException if the amount is negative
+     */
     public abstract BigDecimal price(int amount) throws SellerNegativeAmountException;
 
     @Override
@@ -48,7 +68,7 @@ public abstract class BaseSeller implements Seller{
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         return ((Seller) o).getItemType().equals(this.getItemType());
     }
 }
