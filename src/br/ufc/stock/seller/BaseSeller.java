@@ -5,6 +5,7 @@ import br.ufc.stock.Request;
 import br.ufc.stock.Stock;
 import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.exception.CreditRequestException;
+import br.ufc.stock.seller.exception.SellerNegativeAmountException;
 import br.ufc.store.StoreRequester;
 
 import java.math.BigDecimal;
@@ -15,7 +16,11 @@ public abstract class BaseSeller implements Seller{
     protected BigDecimal price;
     protected StoreRequester requester;
 
-    public Sale sell(int amount){
+    public Sale sell(int amount) throws SellerNegativeAmountException {
+        if(amount < 0){
+            throw new SellerNegativeAmountException(amount);
+        }
+
         BigDecimal totalPrice = this.price(amount);
         Request req = new Request(totalPrice);
 
