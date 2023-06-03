@@ -1,5 +1,7 @@
 package br.ufc.stock;
 
+import br.ufc.stock.exception.RequestNegativePriceException;
+
 import java.math.BigDecimal;
 
 public class Request {
@@ -12,6 +14,9 @@ public class Request {
 
     public Request(BigDecimal value){
         this.status = RequestStatus.PROCESSING;
+        if(value.compareTo(BigDecimal.ZERO) < 0){
+            throw new RequestNegativePriceException(value);
+        }
         this.value = value;
     }
 
