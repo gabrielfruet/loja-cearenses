@@ -4,15 +4,16 @@ import br.ufc.stock.Item;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Sale implements Serializable {
     Item itemType;
     int amount;
     BigDecimal totalPrice;
-    Date date;
+    LocalDate date;
 
-    public Sale(Item itemType, int amount, BigDecimal totalPrice, Date date){
+    public Sale(Item itemType, int amount, BigDecimal totalPrice, LocalDate date){
         this.itemType = itemType;
         this.amount = amount;
         this.totalPrice = totalPrice;
@@ -31,7 +32,7 @@ public class Sale implements Serializable {
         return totalPrice;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
