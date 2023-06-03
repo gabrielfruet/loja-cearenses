@@ -13,6 +13,7 @@ public class SaleManager implements Serializable {
     }
 
     public void register(Sale sale) {
-
+        if (!sales.contains(sale))
+            sales.add(sale);
     }
 }

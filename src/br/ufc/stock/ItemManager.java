@@ -11,6 +11,14 @@ public class ItemManager {
     }
 
     public void register(Item item){
+        boolean alreadyExists = false;
+        for(Item current : items){
+            if(current.getName().equals(item.getName()))
+                alreadyExists = true;
+        }
+
+        if(!alreadyExists)
+            this.items.add(item);
 
     }
 
