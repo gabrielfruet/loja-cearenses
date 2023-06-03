@@ -15,7 +15,6 @@ public class Item implements Serializable {
         Item.itemNo += 1;
     }
 
-    @Override
     public boolean equals(Object o){
         return ((Item)o).getId().equals(this.id);
     }
