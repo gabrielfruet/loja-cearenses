@@ -8,6 +8,7 @@ import br.ufc.stock.seller.exception.CreditRequestException;
 import br.ufc.store.StoreRequester;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public abstract class BaseSeller implements Seller{
     protected Stock stock;
@@ -25,7 +26,12 @@ public abstract class BaseSeller implements Seller{
         }
 
         stock.decreaseAmount(amount);
-        return null;
+        return new Sale(
+                this.getItemType(),
+                amount,
+                totalPrice,
+                LocalDate.now()
+        );
     }
 
     public abstract BigDecimal price(int amount);

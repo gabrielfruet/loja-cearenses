@@ -3,7 +3,7 @@ package br.ufc.stock.seller.exception;
 import br.ufc.stock.Request;
 
 public class CreditRequestException extends RuntimeException {
-    Request req;
+    private Request req;
     public CreditRequestException(Request req) {
         this.req = req;
     }
