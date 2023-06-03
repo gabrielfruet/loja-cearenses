@@ -30,7 +30,12 @@ public class SellerManager {
         }
     }
 
-    public Optional<Seller> get(String id){
+    public Optional<Seller> get(String name){
+        for(Seller s : sellers){
+            if(s.getItemType().getName().equals(name)){
+                return Optional.of(s);
+            }
+        }
         return Optional.empty();
     }
 
