@@ -46,4 +46,9 @@ public abstract class BaseSeller implements Seller{
     public Item getItemType() {
         return this.stock.getItemType();
     }
+
+    @Override
+    public boolean equals(Object o){
+        return ((Seller) o).getItemType().equals(this.getItemType());
+    }
 }

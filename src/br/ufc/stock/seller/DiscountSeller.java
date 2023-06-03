@@ -20,13 +20,13 @@ public class DiscountSeller extends BaseSeller implements Serializable {
             throw new SellerNegativeAmountException(amount);
         }
 
-        BigDecimal discount = new BigDecimal(0.0);
+        BigDecimal discount = new BigDecimal("0.0");
         if(amount >= 30){
-            discount = new BigDecimal(0.3);
+            discount = new BigDecimal("0.3");
         }else if(amount >= 20){
-            discount = new BigDecimal(0.2);
+            discount = new BigDecimal("0.2");
         }else if(amount >= 10){
-            discount = new BigDecimal(0.1);
+            discount = new BigDecimal("0.1");
         }
 
         return this.price.multiply(new BigDecimal(amount))
