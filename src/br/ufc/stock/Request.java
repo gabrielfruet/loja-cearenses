@@ -31,4 +31,11 @@ public class Request {
         return this.status.equals(RequestStatus.CONCLUDED);
     }
 
+    @Override
+    public String toString() {
+        return "Request{" +
+                "value=" + value +
+                ", status=" + status +
+                '}';
+    }
 }
