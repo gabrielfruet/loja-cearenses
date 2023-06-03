@@ -1,6 +1,7 @@
 package br.ufc.stock.seller;
 
 import br.ufc.stock.Stock;
+import br.ufc.stock.seller.exception.SellerNegativeAmountException;
 import br.ufc.store.StoreRequester;
 
 import java.io.Serializable;
@@ -14,8 +15,25 @@ public class DiscountSeller extends BaseSeller implements Serializable {
     }
 
     @Override
-    public BigDecimal price(int amount) {
-        return null;
+    public BigDecimal price(int amount) throws SellerNegativeAmountException {
+        if(amount < 0){
+            throw new SellerNegativeAmountException(amount);
+        }
+
+        BigDecimal discount = new BigDecimal(0.0);
+        if(amount >= 30){
+            discount = new BigDecimal(0.3);
+        }else if(amount >= 20){
+            discount = new BigDecimal(0.2);
+        }else if(amount >= 10){
+            discount = new BigDecimal(0.1);
+        }
+
+        return this.price.multiply(new BigDecimal(amount))
+                .multiply(
+                        BigDecimal.ONE
+                                .add(discount)
+                );
     }
 
 }

@@ -31,6 +31,7 @@ public abstract class BaseSeller implements Seller{
         }
 
         stock.decreaseAmount(amount);
+
         return new Sale(
                 this.getItemType(),
                 amount,
@@ -39,7 +40,7 @@ public abstract class BaseSeller implements Seller{
         );
     }
 
-    public abstract BigDecimal price(int amount);
+    public abstract BigDecimal price(int amount) throws SellerNegativeAmountException;
 
     @Override
     public Item getItemType() {

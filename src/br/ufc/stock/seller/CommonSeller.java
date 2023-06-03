@@ -1,6 +1,7 @@
 package br.ufc.stock.seller;
 
 import br.ufc.stock.Stock;
+import br.ufc.stock.seller.exception.SellerNegativeAmountException;
 import br.ufc.store.StoreRequester;
 
 import java.io.Serializable;
@@ -14,7 +15,10 @@ public class CommonSeller extends BaseSeller implements Serializable {
     }
 
     @Override
-    public BigDecimal price(int amount) {
+    public BigDecimal price(int amount) throws SellerNegativeAmountException {
+        if(amount < 0){
+            throw new SellerNegativeAmountException(amount);
+        }
         return this.price.multiply(
                 new BigDecimal(amount)
         );

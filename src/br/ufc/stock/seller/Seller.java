@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 
 public interface Seller {
     Sale sell(int amount) throws SellerNegativeAmountException;
-    BigDecimal price(int amount);
+    BigDecimal price(int amount) throws SellerNegativeAmountException;
     Item getItemType();
 }
