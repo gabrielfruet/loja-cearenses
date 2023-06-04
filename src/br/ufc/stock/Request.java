@@ -3,6 +3,8 @@ package br.ufc.stock;
 import java.math.BigDecimal;
 
 public class Request {
+
+    //Resolver se a request vai guardar a exceção
     private BigDecimal value;
     private RequestStatus status;
 
@@ -13,6 +15,7 @@ public class Request {
     public Request(BigDecimal value){
         this.status = RequestStatus.PROCESSING;
         this.value = value;
+
     }
 
     public void conclude() {
@@ -26,5 +29,12 @@ public class Request {
             this.status = RequestStatus.DECLINED;
         }
     }
+    public boolean isConcluded(){
+        return this.status==RequestStatus.CONCLUDED;
+    }
+    public boolean isDeclined(){
+        return this.status==RequestStatus.DECLINED;
+    }
+
 
 }
