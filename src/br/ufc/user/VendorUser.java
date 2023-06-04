@@ -13,7 +13,10 @@ public class VendorUser implements Serializable {
     public VendorUser(String username, String password){
         this.username = username;
         this.passwordHash = password.hashCode();
+        this.saleManager = new SaleManager();
     }
+
+    public String getUsername(){return this.username;}
 
     public int getPasswordHash(){
         return this.passwordHash;
