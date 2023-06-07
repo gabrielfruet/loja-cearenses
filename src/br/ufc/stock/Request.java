@@ -5,6 +5,8 @@ import br.ufc.stock.exception.RequestNegativePriceException;
 import java.math.BigDecimal;
 
 public class Request {
+
+    //Resolver se a request vai guardar a exceção
     private BigDecimal value;
     private RequestStatus status;
 
@@ -18,6 +20,7 @@ public class Request {
             throw new RequestNegativePriceException(value);
         }
         this.value = value;
+
     }
 
     public void conclude() {
@@ -31,6 +34,13 @@ public class Request {
             this.status = RequestStatus.DECLINED;
         }
     }
+    public boolean isConcluded(){
+        return this.status==RequestStatus.CONCLUDED;
+    }
+    public boolean isDeclined(){
+        return this.status==RequestStatus.DECLINED;
+    }
+
 
     public boolean isConcluded(){
         return this.status.equals(RequestStatus.CONCLUDED);
