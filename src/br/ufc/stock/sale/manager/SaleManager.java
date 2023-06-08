@@ -3,7 +3,9 @@ package br.ufc.stock.sale.manager;
 import br.ufc.stock.sale.Sale;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Vector;
+import java.util.Collections;
 
 /**
  * The SaleManager class manages the registration of sales.
@@ -29,5 +31,14 @@ public class SaleManager implements Serializable {
     public void register(Sale sale) {
         if (!sales.contains(sale))
             sales.add(sale);
+    }
+
+    /**
+     * Retrieves an immutable list of all registered sales.
+     *
+     * @return An immutable list of sales.
+     */
+    public List<Sale> getSales() {
+        return Collections.unmodifiableList(sales);
     }
 }

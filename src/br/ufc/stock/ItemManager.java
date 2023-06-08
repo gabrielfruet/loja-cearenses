@@ -43,7 +43,14 @@ public class ItemManager {
      * @return An Optional containing the item if found, or an empty Optional otherwise.
      */
     public Optional<Item> getByName(String name){
-        return Optional.empty();
+        Item item = null;
+        for(Item current : items){
+            if(current.getName().equals(name)) {
+                item = current;
+                break;
+            }
+        }
+        return Optional.ofNullable(item);
     }
 
     /**
@@ -53,6 +60,13 @@ public class ItemManager {
      * @return An Optional containing the item if found, or an empty Optional otherwise.
      */
     public Optional<Item> getById(String id){
-        return Optional.empty();
+        Item item = null;
+        for(Item current : items){
+            if(current.getId().equals(id)) {
+                item = current;
+                break;
+            }
+        }
+        return Optional.ofNullable(item);
     }
 }
