@@ -20,7 +20,6 @@ public class Request {
             throw new RequestNegativePriceException(value);
         }
         this.value = value;
-
     }
 
     public void conclude() {
