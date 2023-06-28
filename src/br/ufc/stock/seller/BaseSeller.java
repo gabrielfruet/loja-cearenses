@@ -1,6 +1,8 @@
 package br.ufc.stock.seller;
 
 import br.ufc.stock.Item;
+import br.ufc.stock.exception.InsufficientAmountStockException;
+import br.ufc.stock.exception.NegativeAmountException;
 import br.ufc.stock.request.Request;
 import br.ufc.stock.Stock;
 import br.ufc.stock.sale.Sale;
@@ -29,20 +31,13 @@ public abstract class BaseSeller implements Seller {
      * @throws SellerNegativeAmountException if the amount is negative
      * @throws CreditRequestException        if the credit request is not concluded
      */
-    public Sale sell(int amount) throws SellerNegativeAmountException {
+    public Sale sell(int amount) throws SellerNegativeAmountException, NegativeAmountException, InsufficientAmountStockException {
         if (amount < 0) {
             throw new SellerNegativeAmountException(amount);
         }
 
         BigDecimal totalPrice = this.price(amount);
-        Request req = new Request(totalPrice);
-
-        this.requester.credit(req);
-
-        if (!req.isConcluded()) {
-            throw new CreditRequestException(req);
-        }
-
+        this.requester.credit(totalPrice);
         stock.decreaseAmount(amount);
 
         return new Sale(

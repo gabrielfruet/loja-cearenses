@@ -1,6 +1,8 @@
 package br.ufc.stock.seller;
 
 import br.ufc.stock.Item;
+import br.ufc.stock.exception.InsufficientAmountStockException;
+import br.ufc.stock.exception.NegativeAmountException;
 import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.exception.SellerNegativeAmountException;
 
@@ -19,7 +21,7 @@ public interface Seller {
      * @return a Sale object representing the sale
      * @throws SellerNegativeAmountException if the amount is negative
      */
-    Sale sell(int amount) throws SellerNegativeAmountException;
+    Sale sell(int amount) throws SellerNegativeAmountException, NegativeAmountException, InsufficientAmountStockException;
 
     /**
      * Calculates the price for a specified amount of items.
