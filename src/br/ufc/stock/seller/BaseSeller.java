@@ -1,7 +1,7 @@
 package br.ufc.stock.seller;
 
 import br.ufc.stock.Item;
-import br.ufc.stock.Request;
+import br.ufc.stock.request.Request;
 import br.ufc.stock.Stock;
 import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.exception.CreditRequestException;

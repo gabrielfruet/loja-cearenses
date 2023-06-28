@@ -1,4 +1,4 @@
-package br.ufc.stock;
+package br.ufc.stock.request;
 
 import br.ufc.stock.exception.RequestNegativePriceException;
 
