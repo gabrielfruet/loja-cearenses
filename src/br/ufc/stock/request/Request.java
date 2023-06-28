@@ -16,6 +16,7 @@ public class Request {
     }
 
     public Request(Concludable concludable, BigDecimal value){
+        this.concludable = concludable;
         this.status = RequestStatus.PROCESSING;
         if(value.compareTo(BigDecimal.ZERO) < 0){
             throw new RequestNegativePriceException(value);
@@ -24,24 +25,19 @@ public class Request {
     }
 
     public void conclude() {
-        if(this.status.equals(RequestStatus.PROCESSING)){
-            this.status = RequestStatus.CONCLUDED;
-        }
+        this.status = RequestStatus.CONCLUDED;
+        this.concludable.conclude();
     }
 
     public void decline() {
-        if(this.status.equals(RequestStatus.PROCESSING)){
-            this.status = RequestStatus.DECLINED;
-        }
+        this.status = RequestStatus.DECLINED;
     }
-    public void retry() {
 
-    }
     public boolean isConcluded(){
         return this.status.equals(RequestStatus.CONCLUDED);
     }
     public boolean isDeclined(){
-        return this.status==RequestStatus.DECLINED;
+        return this.status.equals(RequestStatus.DECLINED);
     }
 
 
