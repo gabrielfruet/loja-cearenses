@@ -9,6 +9,7 @@ package br.ufc.stock;
 import br.ufc.stock.exception.InsufficientAmountStockException;
 import br.ufc.stock.exception.NegativeAmountException;
 import br.ufc.stock.exception.NegativeBuyPriceException;
+import br.ufc.stock.request.Request;
 import br.ufc.store.StoreRequester;
 
 import java.io.Serializable;
@@ -103,7 +104,6 @@ public class Stock implements Serializable {
         if (amount < 0) {
             throw new NegativeAmountException(amount);
         }
-        increaseAmount(amount);
     }
 
     /**
