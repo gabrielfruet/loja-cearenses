@@ -8,13 +8,14 @@ public class Request {
 
     //Resolver se a request vai guardar a exceção
     private BigDecimal value;
+    private Concludable concludable;
     private RequestStatus status;
 
     public BigDecimal getValue(){
         return this.value;
     }
 
-    public Request(BigDecimal value){
+    public Request(Concludable concludable, BigDecimal value){
         this.status = RequestStatus.PROCESSING;
         if(value.compareTo(BigDecimal.ZERO) < 0){
             throw new RequestNegativePriceException(value);
@@ -33,17 +34,17 @@ public class Request {
             this.status = RequestStatus.DECLINED;
         }
     }
+    public void retry() {
+
+    }
     public boolean isConcluded(){
-        return this.status==RequestStatus.CONCLUDED;
+        return this.status.equals(RequestStatus.CONCLUDED);
     }
     public boolean isDeclined(){
         return this.status==RequestStatus.DECLINED;
     }
 
 
-    public boolean isConcluded(){
-        return this.status.equals(RequestStatus.CONCLUDED);
-    }
 
     @Override
     public String toString() {
