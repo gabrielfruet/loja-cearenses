@@ -9,6 +9,7 @@ package br.ufc.stock;
 import br.ufc.stock.exception.InsufficientAmountStockException;
 import br.ufc.stock.exception.NegativeAmountException;
 import br.ufc.stock.exception.NegativeBuyPriceException;
+import br.ufc.stock.request.ConcludeRestock;
 import br.ufc.stock.request.Request;
 import br.ufc.store.StoreRequester;
 
@@ -104,6 +105,18 @@ public class Stock implements Serializable {
         if (amount < 0) {
             throw new NegativeAmountException(amount);
         }
+        Request req  = new Request(
+                new ConcludeRestock(this, amount),
+                this.priceToBuy(amount)
+        );
+        this.requester.debit(req);
+    }
+
+    public BigDecimal priceToBuy(int amount) throws NegativeAmountException{
+        if(amount < 0){
+            throw new NegativeAmountException(amount);
+        }
+        return this.buyPrice.multiply(BigDecimal.valueOf(amount));
     }
 
     /**
