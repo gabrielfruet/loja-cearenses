@@ -1,6 +1,6 @@
 package br.ufc.store;
 
-import br.ufc.stock.Request;
+import br.ufc.stock.request.Request;
 
 import java.io.Serializable;
 
