@@ -34,9 +34,9 @@ public class Request {
             this.status = RequestStatus.DECLINED;
         }
     }
-    public boolean isConcluded(){
+    /*public boolean isConcluded(){
         return this.status==RequestStatus.CONCLUDED;
-    }
+    }*/
     public boolean isDeclined(){
         return this.status==RequestStatus.DECLINED;
     }

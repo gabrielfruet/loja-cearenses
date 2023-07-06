@@ -13,8 +13,8 @@ public class VendorManager implements Serializable {
 
     public void register(VendorUser user){
         for(VendorUser current : vendors){
-            if(current.getUsername().equals(user.getUsername()))
-                throw VendorUsernameAlreadyExists(user.getUsername());
+            /*if(current.getUsername().equals(user.getUsername()))
+                throw VendorUsernameAlreadyExists(user.getUsername());*/
         }
         this.vendors.add(user);
 
@@ -36,9 +36,9 @@ public class VendorManager implements Serializable {
         if(user.isEmpty()) {
             return Optional.empty();
         }
-        else if(user.get().getPasswordHash() != password.hashCode()){
+        /*else if(user.get().getPasswordHash() != password.hashCode()){
             throw VendorPasswordTypedInvalid();
-        }
+        }*/
         else{
             return user;
         }

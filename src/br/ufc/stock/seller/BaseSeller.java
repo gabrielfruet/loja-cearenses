@@ -43,7 +43,7 @@ public abstract class BaseSeller implements Seller {
             throw new CreditRequestException(req);
         }
 
-        stock.decreaseAmount(amount);
+        //stock.decreaseAmount(amount);
 
         return new Sale(
                 this.getItemType(),
