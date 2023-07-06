@@ -1,12 +1,15 @@
 package br.ufc.store;
 
+import br.ufc.stock.Item;
 import br.ufc.stock.manager.StockManager;
+import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.manager.SellerManager;
 import br.ufc.user.VendorManager;
 import br.ufc.user.VendorUser;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Store implements Serializable {
     private BigDecimal cash;
@@ -23,4 +26,40 @@ public class Store implements Serializable {
     public void credit(BigDecimal value){
 
     }
+
+    public void login(String username, String password){
+
+    }
+    public void register(String username, String password){
+
+    }
+
+    public VendorUser getActiveUser() {
+        return activeUser;
+    }
+
+    public BigDecimal getCash(){
+        return null;
+    }
+    public List<Sale> getLastTransactions(){
+        return null;
+    }
+
+    public void createItem(String name, String descriptor){
+
+    }
+
+    public void updateItem(String descriptor){
+
+    }
+
+    public List<Item> getItems(){
+
+        return null;
+    }
+
+    public void createStock(Item itemType, int amount, BigDecimal buyPrice, StoreRequester requester){
+
+    }
+
 }
