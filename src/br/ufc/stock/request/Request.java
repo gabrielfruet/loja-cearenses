@@ -1,4 +1,4 @@
-package br.ufc.stock;
+package br.ufc.stock.request;
 
 import br.ufc.stock.exception.RequestNegativePriceException;
 
@@ -8,13 +8,15 @@ public class Request {
 
     //Resolver se a request vai guardar a exceção
     private BigDecimal value;
+    private Concludable concludable;
     private RequestStatus status;
 
     public BigDecimal getValue(){
         return this.value;
     }
 
-    public Request(BigDecimal value){
+    public Request(Concludable concludable, BigDecimal value){
+        this.concludable = concludable;
         this.status = RequestStatus.PROCESSING;
         if(value.compareTo(BigDecimal.ZERO) < 0){
             throw new RequestNegativePriceException(value);
@@ -23,27 +25,22 @@ public class Request {
     }
 
     public void conclude() {
-        if(this.status.equals(RequestStatus.PROCESSING)){
-            this.status = RequestStatus.CONCLUDED;
-        }
+        this.status = RequestStatus.CONCLUDED;
+        this.concludable.conclude();
     }
 
     public void decline() {
-        if(this.status.equals(RequestStatus.PROCESSING)){
-            this.status = RequestStatus.DECLINED;
-        }
+        this.status = RequestStatus.DECLINED;
     }
-    public boolean isConcluded(){
-        return this.status==RequestStatus.CONCLUDED;
-    }
-    public boolean isDeclined(){
-        return this.status==RequestStatus.DECLINED;
-    }
-
 
     public boolean isConcluded(){
         return this.status.equals(RequestStatus.CONCLUDED);
     }
+    public boolean isDeclined(){
+        return this.status.equals(RequestStatus.DECLINED);
+    }
+
+
 
     @Override
     public String toString() {

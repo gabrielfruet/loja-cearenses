@@ -1,7 +1,5 @@
 package br.ufc.stock.exception;
 
-import br.ufc.stock.Request;
-
 import java.math.BigDecimal;
 
 public class RequestNegativePriceException extends RuntimeException{
