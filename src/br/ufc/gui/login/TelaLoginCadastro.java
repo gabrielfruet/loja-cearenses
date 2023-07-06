@@ -1,15 +1,24 @@
 package br.ufc.gui.login;
 
+import br.ufc.gui.storeSystemFrame.StoreSystemFrame;
+import br.ufc.user.VendorManager;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import br.ufc.store.Store;
+import br.ufc.user.VendorUser;
+
+import java.util.Optional;
 
 public class TelaLoginCadastro extends JFrame {
     private JButton btnLogin;
     private JButton btnCadastro;
 
-    public TelaLoginCadastro() {
+    private Store mainStore;
+
+    public TelaLoginCadastro(Store store) {
+        mainStore = store;
+        VendorManager vendorManager = store.getVendorManager();
         setTitle("Tela de Login e Cadastro");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
@@ -18,40 +27,30 @@ public class TelaLoginCadastro extends JFrame {
         btnLogin = new JButton("Login");
         btnCadastro = new JButton("Cadastro");
 
-        btnLogin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                exibirTelaLogin();
-            }
-        });
+        btnLogin.addActionListener(e -> exibirTelaLogin(vendorManager));
 
-        btnCadastro.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                exibirTelaCadastro();
-            }
-        });
+        btnCadastro.addActionListener(e -> exibirTelaCadastro(vendorManager));
 
         add(btnLogin);
         add(btnCadastro);
     }
 
-    private void exibirTelaLogin() {
-        LoginDialog.showLoginDialog();
+    private void exibirTelaLogin(VendorManager vendorManager) {
+        LoginDialog.showLoginDialog(this,vendorManager);
     }
 
-    private void exibirTelaCadastro() {
-        RegisterDialog.showRegisterDialog();
+    private void exibirTelaCadastro(VendorManager vendorManager) {
+        RegisterDialog.showRegisterDialog(vendorManager);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                TelaLoginCadastro telaLoginCadastro = new TelaLoginCadastro();
-                telaLoginCadastro.setVisible(true);
-            }
+    public void sucessLogin(Optional<VendorUser> user)
+    {
+        mainStore.setVendor(user.get());
+        SwingUtilities.invokeLater(() -> {
+            StoreSystemFrame mainFrame = new StoreSystemFrame(mainStore);
+            mainFrame.setVisible(true);
         });
+        this.dispose();
     }
 
 }

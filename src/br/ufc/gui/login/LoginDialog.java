@@ -1,10 +1,17 @@
 package br.ufc.gui.login;
 
 import javax.swing.*;
+import javax.swing.text.html.Option;
+
+import br.ufc.gui.exception.ExceptionDialog;
+import br.ufc.user.VendorManager;
+import br.ufc.user.VendorUser;
+import br.ufc.gui.login.TelaLoginCadastro;
+import java.util.Optional;
 
 public class LoginDialog {
 
-    public static void showLoginDialog() {
+    public static void showLoginDialog(JFrame tela, VendorManager vendorManager) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -19,24 +26,20 @@ public class LoginDialog {
         panel.add(passwordField);
 
         int option = JOptionPane.showOptionDialog(null, panel, "login", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE, null, new Object[]{"login", "Cancelar"}, null);
+                JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Login", "Cancelar"}, null);
 
         if (option == 0) {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            if (isValidLogin(username, password)) {
-                JOptionPane.showMessageDialog(null, "Login bem-sucedido!");
-                //Store(vendor);
-            } else {
-                JOptionPane.showMessageDialog(null, "Credenciais inválidas. Tente novamente.");
-                showLoginDialog();
+            try {
+                Optional<VendorUser> user = vendorManager.login(username,password);
+                ((TelaLoginCadastro) tela).sucessLogin(user);
+
+            } catch (Exception e) {
+                new ExceptionDialog(e);
             }
         }
-    }
 
-    private static boolean isValidLogin(String username, String password) {
-
-        return username.equals("admin") && password.equals("password123");//VendorManager.login(username,password);
     }
 }

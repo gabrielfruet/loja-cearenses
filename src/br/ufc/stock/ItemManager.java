@@ -1,7 +1,10 @@
 package br.ufc.stock;
 
+import java.io.Serializable;
 import java.util.Optional;
 import java.util.Vector;
+import br.ufc.stock.exception.ItemAlreadyExists;
+
 
 /**
  * The ItemManager class manages the registration and retrieval of items.
@@ -9,7 +12,7 @@ import java.util.Vector;
  *
  * @author Kelvin Leandro
  */
-public class ItemManager {
+public class ItemManager implements Serializable {
     private Vector<Item> items;
 
     /**
@@ -24,7 +27,7 @@ public class ItemManager {
      *
      * @param item The item to be registered.
      */
-    public void register(Item item){
+    public void register(Item item) throws ItemAlreadyExists{
         boolean alreadyExists = false;
         for(Item current : items){
             if(current.getName().equals(item.getName()))
@@ -33,6 +36,8 @@ public class ItemManager {
 
         if(!alreadyExists)
             this.items.add(item);
+        else
+            throw new ItemAlreadyExists();
 
     }
 
@@ -68,5 +73,9 @@ public class ItemManager {
             }
         }
         return Optional.ofNullable(item);
+    }
+
+    public Optional<Vector<Item>> getItems() {
+        return Optional.of(items);
     }
 }

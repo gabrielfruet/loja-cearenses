@@ -6,7 +6,7 @@ public class Item implements Serializable {
     private String name;
     private String descriptor;
     private String id;
-    private static int itemNo = 0;
+    private static int itemNo = 1;
 
     public Item(String name, String descriptor) {
         this.name = name;
