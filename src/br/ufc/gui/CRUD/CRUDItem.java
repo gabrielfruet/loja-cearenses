@@ -82,12 +82,9 @@ public class CRUDItem extends CRUDAbstract<Item>
 
     protected void loadElements()
     {
-        Optional<Vector<Item>> itemsOptional = itemManager.getItems();
-        if(itemsOptional.isPresent()) {
-            Vector<Item> items = itemsOptional.get();
-            for (Item current : items) {
-                listModel.addElement(current.toString());
-            }
+        Vector<Item> items = itemManager.getItems();
+        for (Item current : items) {
+            listModel.addElement(current.toString());
         }
     }
 }

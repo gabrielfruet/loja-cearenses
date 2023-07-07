@@ -75,11 +75,9 @@ public class ItemManager implements Serializable {
         return Optional.ofNullable(item);
     }
 
-    public Optional<Vector<Item>> getItems() {
-        return Optional.of(items);
+    public Vector<Item> getItems() {
+        return items;
     }
 
-    public Optional<Item> getByIndex(int index){
-        return Optional.ofNullable(items.get(index));
-    }
+    public Optional<Item> getByIndex(int index){return Optional.ofNullable(items.get(index));}
 }
