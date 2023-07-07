@@ -16,8 +16,13 @@ public class CRUDSeller extends CRUDAbstract<Seller>{
     public void addElement(){
 
     }
+    public void editElement(){
+
+    }
+
     protected void loadElements()
     {
 
     }
+
 }

@@ -22,7 +22,6 @@ public class Store implements Serializable {
         itemManager = new ItemManager();
         try{
             vendorManager.register(new VendorUser("admin","admin"));
-            itemManager.register(new Item("Padrão","Padrão"));
         }
         catch(Exception e){
 

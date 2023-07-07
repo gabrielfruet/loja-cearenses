@@ -30,13 +30,11 @@ public abstract class CRUDAbstract<T> extends JPanel {
 
         JButton addButton = new JButton("Adicionar");
         JButton editButton = new JButton("Editar");
-        JButton deleteButton = new JButton("Excluir");
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.add(addButton);
         buttonPanel.add(editButton);
-        buttonPanel.add(deleteButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
         // Ação do botão Adicionar
@@ -51,21 +49,13 @@ public abstract class CRUDAbstract<T> extends JPanel {
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //editElement();
-            }
-        });
-
-        // Ação do botão Excluir
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //deleteElement();
+                editElement();
             }
         });
 
     }
 
     public abstract void addElement();
-
+    public abstract void editElement();
     protected abstract void loadElements();
 }
