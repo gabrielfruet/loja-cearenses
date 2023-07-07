@@ -126,6 +126,7 @@ public class Stock implements Serializable {
      * @return The Item object representing the item type.
      */
     public Item getItemType() { return itemType; }
+    public String getItemName(){return itemType.getName();}
 
     /**
      * pedrofalcao10

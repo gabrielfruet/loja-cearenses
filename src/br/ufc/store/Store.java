@@ -5,6 +5,8 @@ import br.ufc.stock.ItemManager;
 import br.ufc.stock.Stock;
 import br.ufc.stock.manager.StockManager;
 import br.ufc.stock.sale.Sale;
+import br.ufc.stock.seller.Seller;
+import br.ufc.stock.seller.manager.SellerManager;
 import br.ufc.user.VendorManager;
 import br.ufc.user.VendorUser;
 
@@ -16,6 +18,7 @@ public class Store implements Serializable {
     private BigDecimal cash;
     private ItemManager itemManager;
     private StockManager stockManager;
+    private SellerManager sellerManager;
     private VendorManager vendorManager;
     private VendorUser activeUser;
     private StoreRequester storeRequester;
@@ -27,6 +30,7 @@ public class Store implements Serializable {
         itemManager = new ItemManager();
         stockManager = new StockManager();
         storeRequester = new StoreRequester();
+        sellerManager = new SellerManager();
         try{
             vendorManager.register(new VendorUser("admin","admin"));
         }
@@ -107,4 +111,6 @@ public class Store implements Serializable {
     public StoreRequester getStoreRequester() {
         return storeRequester;
     }
+
+    public SellerManager getSellerManager(){return sellerManager;}
 }

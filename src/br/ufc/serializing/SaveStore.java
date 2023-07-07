@@ -21,13 +21,12 @@ public class SaveStore {
         timer.schedule(task, 0, 1000);
     }
 
-    private static void saveData(Store store){
+    public static void saveData(Store store){
         try (FileOutputStream fileOut = new FileOutputStream("store.bin");
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(store);
             out.close();
             fileOut.close();
-            System.out.println("Classe serializada com sucesso.");
         } catch (IOException e) {
             e.printStackTrace();
         }

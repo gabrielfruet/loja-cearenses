@@ -6,6 +6,7 @@ import br.ufc.stock.exception.NegativeAmountException;
 import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.exception.SellerNegativeAmountException;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -38,4 +39,7 @@ public interface Seller {
      * @return the item type
      */
     Item getItemType();
+
+
+
 }
