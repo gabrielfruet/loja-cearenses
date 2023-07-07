@@ -52,6 +52,33 @@ public class CRUDItem extends CRUDAbstract<Item>
         }
 
     }
+    public void editElement(){
+        // Obtém o índice do produto selecionado na lista
+        int selectedIndex = elementList.getSelectedIndex();
+
+        if (selectedIndex != -1) {
+            // Obtém o produto selecionado
+            Optional<Item> itemSearched = itemManager.getByIndex(selectedIndex);
+            Item item = itemSearched.get();
+            // Exibe as caixas de diálogo preenchidas com os dados do produto selecionado
+            String newName = JOptionPane.showInputDialog("Digite o novo nome do produto:", item.getName());
+            String newDesc = JOptionPane.showInputDialog("Digite a nova descrição do item:", item.getDescriptor());
+
+            // Verifica se o usuário cancelou a entrada de dados
+            if (newName != null && newDesc != null) {
+                newName = newName.trim();
+                newDesc = newDesc.trim();
+
+                // Atualiza os dados do produto
+                item.setName(newName);
+                item.setDescriptor(newDesc);
+
+                // Atualiza o modelo da lista
+                listModel.set(selectedIndex, item.toString());
+            }
+        }
+    }
+
 
     protected void loadElements()
     {

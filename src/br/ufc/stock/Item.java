@@ -19,6 +19,10 @@ public class Item implements Serializable {
         return ((Item)o).getId().equals(this.id);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setDescriptor(String descriptor) {
         this.descriptor = descriptor;
     }
@@ -33,5 +37,11 @@ public class Item implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+
+    @Override
+    public String toString() {
+        return name + " - " + descriptor;
     }
 }
