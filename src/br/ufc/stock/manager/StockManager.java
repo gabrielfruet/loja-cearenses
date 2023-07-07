@@ -9,11 +9,12 @@ import br.ufc.stock.Stock;
 import br.ufc.stock.exception.NegativeAmountException;
 import br.ufc.stock.exception.StockAlreadyExistsException;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
 
-public class StockManager {
+public class StockManager implements Serializable {
     private Vector<Stock> stocksVector;
 
     /**
