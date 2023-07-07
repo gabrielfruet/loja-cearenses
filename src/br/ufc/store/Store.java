@@ -3,6 +3,7 @@ package br.ufc.store;
 import br.ufc.stock.Item;
 import br.ufc.stock.ItemManager;
 import br.ufc.stock.Stock;
+import br.ufc.stock.manager.StockManager;
 import br.ufc.stock.sale.Sale;
 import br.ufc.user.VendorManager;
 import br.ufc.user.VendorUser;
@@ -14,12 +15,15 @@ import java.util.List;
 public class Store implements Serializable {
     private BigDecimal cash;
     private ItemManager itemManager;
+    private StockManager stockManager;
     private VendorManager vendorManager;
     private VendorUser activeUser;
+
 
     public Store(){
         vendorManager = new VendorManager();
         itemManager = new ItemManager();
+        stockManager = new StockManager();
         try{
             vendorManager.register(new VendorUser("admin","admin"));
         }
@@ -91,5 +95,9 @@ public class Store implements Serializable {
 
     public void createStock(Item itemType, int amount, BigDecimal buyPrice, StoreRequester requester){
 
+    }
+
+    public StockManager getStockManager() {
+        return stockManager;
     }
 }
