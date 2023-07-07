@@ -1,5 +1,7 @@
 package br.ufc.stock.request;
 
-public enum RequestStatus {
+import java.io.Serializable;
+
+public enum RequestStatus implements Serializable {
     CONCLUDED, DECLINED, PROCESSING;
 }

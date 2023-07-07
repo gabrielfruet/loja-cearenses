@@ -2,9 +2,10 @@ package br.ufc.stock.request;
 
 import br.ufc.stock.exception.RequestNegativePriceException;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Request {
+public class Request implements Serializable {
 
     //Resolver se a request vai guardar a exceção
     private BigDecimal value;

@@ -18,12 +18,15 @@ public class Store implements Serializable {
     private StockManager stockManager;
     private VendorManager vendorManager;
     private VendorUser activeUser;
+    private StoreRequester storeRequester;
+
 
 
     public Store(){
         vendorManager = new VendorManager();
         itemManager = new ItemManager();
         stockManager = new StockManager();
+        storeRequester = new StoreRequester();
         try{
             vendorManager.register(new VendorUser("admin","admin"));
         }
@@ -99,5 +102,9 @@ public class Store implements Serializable {
 
     public StockManager getStockManager() {
         return stockManager;
+    }
+
+    public StoreRequester getStoreRequester() {
+        return storeRequester;
     }
 }

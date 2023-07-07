@@ -39,7 +39,11 @@ public class StoreSystemFrame extends JFrame {
         mainPanel = new MainPanel();
         profilePanel = new ProfilePanel();
         itemPanel = new CRUDItem(store.getItemMananger());
-        stockPanel = new CRUDStock(store.getStockManager());
+        stockPanel = new CRUDStock(
+                store.getStockManager(),
+                store.getItemMananger(),
+                store.getStoreRequester()
+        );
 
         showMainPanel();
     }
