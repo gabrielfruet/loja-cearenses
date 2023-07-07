@@ -9,10 +9,12 @@ import br.ufc.stock.Stock;
 import br.ufc.stock.exception.NegativeAmountException;
 import br.ufc.stock.exception.StockAlreadyExistsException;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
 
-public class StockManager {
+public class StockManager implements Serializable {
     private Vector<Stock> stocksVector;
 
     /**
@@ -70,6 +72,17 @@ public class StockManager {
             }
         }
         return Optional.empty();
+    }
+
+    /**
+     * Retrieves all the stocks managed by the StockManager.
+     *
+     * @return A list of all the stocks.
+     *
+     * @author fruet
+     */
+    public List<Stock> getStocks() {
+        return new Vector<Stock>(stocksVector);
     }
 }
 

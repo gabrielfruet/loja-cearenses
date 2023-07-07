@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufc.gui.CRUD.CRUDItem;
+import br.ufc.gui.CRUD.CRUDStock;
 import br.ufc.store.Store;
 import com.sun.tools.javac.Main;
 
@@ -38,6 +39,11 @@ public class StoreSystemFrame extends JFrame {
         mainPanel = new MainPanel();
         profilePanel = new ProfilePanel();
         itemPanel = new CRUDItem(store.getItemMananger());
+        stockPanel = new CRUDStock(
+                store.getStockManager(),
+                store.getItemMananger(),
+                store.getStoreRequester()
+        );
 
         showMainPanel();
     }
@@ -58,8 +64,7 @@ public class StoreSystemFrame extends JFrame {
         stockMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Ação executada ao clicar em "Stock"
-                JOptionPane.showMessageDialog(null, "Stock selecionado");
+                showStockPanel();
             }
         });
         menuBar.add(stockMenu);
@@ -115,6 +120,12 @@ public class StoreSystemFrame extends JFrame {
         setContentPane(itemPanel);
         validate();
         repaint();
+    }
+
+    private void showStockPanel() {
+       setContentPane(stockPanel);
+       validate();
+       repaint();
     }
     private void showProfilePanel() {
         setContentPane(profilePanel);

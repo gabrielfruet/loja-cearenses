@@ -3,7 +3,9 @@ package br.ufc.stock.request;
 import br.ufc.stock.Stock;
 import br.ufc.stock.exception.NegativeAmountException;
 
-public class ConcludeRestock implements Concludable{
+import java.io.Serializable;
+
+public class ConcludeRestock implements Concludable, Serializable {
     private Stock stock;
     private int amount;
     public ConcludeRestock(Stock stock, int amount) throws NegativeAmountException {
