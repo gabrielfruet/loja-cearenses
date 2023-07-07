@@ -1,10 +1,14 @@
 package br.ufc.gui.login;
 
+import br.ufc.gui.exception.ExceptionDialog;
+import br.ufc.user.VendorManager;
+import br.ufc.user.VendorUser;
+
 import javax.swing.*;
 
 public class RegisterDialog {
 
-    public static void showRegisterDialog() {
+    public static void showRegisterDialog(VendorManager vendorManager) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -25,7 +29,14 @@ public class RegisterDialog {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            JOptionPane.showMessageDialog(null, "Registro concluído com sucesso!");
+            try{
+                VendorUser user = new VendorUser(username,password);
+                vendorManager.register(user);
+                JOptionPane.showMessageDialog(null, "Registro concluído com sucesso!");
+            }
+            catch (Exception e){
+                new ExceptionDialog(e);
+            }
         }
     }
 }
