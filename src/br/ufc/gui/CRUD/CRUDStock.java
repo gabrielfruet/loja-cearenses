@@ -26,6 +26,7 @@ public class CRUDStock extends CRUDAbstract<Seller>
         this.stockManager = stockManager;
         this.itemManager = itemManager;
         this.storeRequester = storeRequester;
+        loadElements();
     }
 
     public void addElement(){
@@ -51,7 +52,7 @@ public class CRUDStock extends CRUDAbstract<Seller>
         panel.add(new JScrollPane(itemSelector));
 
         int option = JOptionPane.showOptionDialog(null, panel, "Criar Stock", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Login", "Cancelar"}, null);
+                JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Adicionar", "Cancelar"}, null);
 
         if (option == 0) {
             int amount = Integer.parseInt(quantidadeInicialField.getText());
