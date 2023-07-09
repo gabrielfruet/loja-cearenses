@@ -1,9 +1,11 @@
 package br.ufc.gui.storeSystemFrame;
 
 import br.ufc.gui.exception.ExceptionDialog;
+import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.BaseSeller;
 import br.ufc.stock.seller.Seller;
 import br.ufc.stock.seller.manager.SellerManager;
+import br.ufc.store.Store;
 import br.ufc.user.VendorUser;
 
 import javax.swing.*;
@@ -18,9 +20,9 @@ public class SaleDialog extends JPanel {
     JLabel priceLabel;
     JTextField amountField = new JTextField();
 
-    public SaleDialog(SellerManager sellerManager, VendorUser vendorUser) {
-        this.sellerManager = sellerManager;
-        this.vendorUser = vendorUser;
+    public SaleDialog(Store store) {
+        this.sellerManager = store.getSellerManager();
+        this.vendorUser = store.getActiveUser();
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -69,7 +71,9 @@ public class SaleDialog extends JPanel {
             if (selectedIndex != -1) {
                 BaseSeller selectedSeller = sellerManager.getByIndex(selectedIndex);
                 try {
-                    vendorUser.registerSale(selectedSeller.sell(amount));
+                    Sale sale = selectedSeller.sell(amount);
+                    vendorUser.registerSale(sale);
+                    store.registerSale(sale);
                 } catch (Exception e) {
                     new ExceptionDialog(e);
                 }

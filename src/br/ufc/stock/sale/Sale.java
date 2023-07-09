@@ -38,11 +38,6 @@ public class Sale implements Serializable {
 
     @Override
     public String toString() {
-        return "Sale{" +
-                "itemType=" + itemType +
-                ", amount=" + amount +
-                ", totalPrice=" + totalPrice +
-                ", date=" + date +
-                '}';
+        return itemType.getName()+" - Quantidade: "+amount+" - Valor total: R$" +totalPrice+" - Data: " +date;
     }
 }

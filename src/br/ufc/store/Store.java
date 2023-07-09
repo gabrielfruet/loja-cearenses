@@ -5,16 +5,19 @@ import br.ufc.stock.ItemManager;
 import br.ufc.stock.Stock;
 import br.ufc.stock.manager.StockManager;
 import br.ufc.stock.sale.Sale;
-import br.ufc.stock.seller.Seller;
 import br.ufc.stock.seller.manager.SellerManager;
 import br.ufc.user.VendorManager;
 import br.ufc.user.VendorUser;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Vector;
 
 public class Store implements Serializable {
+    private Vector<Sale> sales;
     private BigDecimal cash;
     private ItemManager itemManager;
     private StockManager stockManager;
@@ -26,6 +29,7 @@ public class Store implements Serializable {
 
 
     public Store(){
+        sales = new Vector<Sale>();
         cash = new BigDecimal(0);
         vendorManager = new VendorManager();
         itemManager = new ItemManager();
@@ -49,10 +53,11 @@ public class Store implements Serializable {
         return itemManager;
     }
     public void debit(BigDecimal value) {
+        cash = cash.subtract(value);
     }
 
     public void credit(BigDecimal value) {
-
+        cash = cash.add(value);
     }
 
     public void login(String username, String password) {
@@ -71,8 +76,11 @@ public class Store implements Serializable {
         return cash;
     }
 
-    public List<Sale> getLastTransactions() {
-        return null;
+    public void registerSale(Sale sale){sales.add(sale);}
+    public Optional<Sale> getLastTransaction() {
+        if(sales.isEmpty())
+            return Optional.ofNullable(null);
+        return Optional.ofNullable(sales.lastElement());
     }
 
     public void createItem(String name, String descriptor) {
