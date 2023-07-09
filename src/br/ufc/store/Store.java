@@ -26,10 +26,11 @@ public class Store implements Serializable {
 
 
     public Store(){
+        cash = new BigDecimal(0);
         vendorManager = new VendorManager();
         itemManager = new ItemManager();
         stockManager = new StockManager();
-        storeRequester = new StoreRequester();
+        storeRequester = new StoreRequester(this);
         sellerManager = new SellerManager();
         try{
             vendorManager.register(new VendorUser("admin","admin"));
@@ -67,7 +68,7 @@ public class Store implements Serializable {
     }
 
     public BigDecimal getCash() {
-        return null;
+        return cash;
     }
 
     public List<Sale> getLastTransactions() {

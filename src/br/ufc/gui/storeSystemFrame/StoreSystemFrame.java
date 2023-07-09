@@ -5,10 +5,9 @@ import br.ufc.gui.CRUD.CRUDSeller;
 import br.ufc.gui.CRUD.CRUDStock;
 import br.ufc.serializing.SaveStore;
 import br.ufc.store.Store;
+import com.sun.tools.javac.Main;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -21,15 +20,14 @@ public class StoreSystemFrame extends JFrame {
     private JPanel itemPanel;
     private JPanel stockPanel;
     private JPanel sellerPanel;
-    private JPanel salePanel;
 
     private List<String> sales;
 
     private Store store;
 
-    public StoreSystemFrame(Store storeVar) {
+    public StoreSystemFrame(Store store) {
 
-        store = storeVar;
+        this.store = store;
         setTitle("Sistema de estoque");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -40,7 +38,7 @@ public class StoreSystemFrame extends JFrame {
         createMenuBar();
 
         mainPanel = new MainPanel();
-        profilePanel = new ProfilePanel();
+        profilePanel = new ProfilePanel(store.getActiveUser());
         itemPanel = new CRUDItem(store.getItemMananger());
         stockPanel = new CRUDStock(
                 store.getStockManager(),
@@ -75,13 +73,12 @@ public class StoreSystemFrame extends JFrame {
         menuBar.add(stockMenu);
 
         JMenuItem sellerMenu = new JMenuItem("Seller");
-        sellerMenu.addActionListener(e -> {showSellerPanel();});
+        sellerMenu.addActionListener(e -> showSellerPanel());
         menuBar.add(sellerMenu);
 
         JMenuItem salesMenu = new JMenuItem("Sales");
         salesMenu.addActionListener(e -> {
-            // Ação executada ao clicar em "Sales"
-            JOptionPane.showMessageDialog(null, "Sales selecionado");
+            new SaleDialog(store.getSellerManager(),store.getActiveUser());
         });
         menuBar.add(salesMenu);
 
@@ -97,6 +94,7 @@ public class StoreSystemFrame extends JFrame {
     }
 
     public void showMainPanel() {
+        ((MainPanel)mainPanel).updateTotalRevenueLabel(store.getCash());
         setContentPane(mainPanel);
         validate();
         repaint();
@@ -109,6 +107,7 @@ public class StoreSystemFrame extends JFrame {
     }
 
     private void showStockPanel() {
+        ((CRUDStock)stockPanel).loadElements();
        setContentPane(stockPanel);
        validate();
        repaint();
@@ -119,6 +118,7 @@ public class StoreSystemFrame extends JFrame {
         repaint();
     }
     private void showProfilePanel() {
+        ((ProfilePanel)profilePanel).loadSales();
         setContentPane(profilePanel);
         validate();
         repaint();

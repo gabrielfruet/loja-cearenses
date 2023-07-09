@@ -98,7 +98,7 @@ public class CRUDStock extends CRUDAbstract<Seller>
             }
         }
     }
-    protected void loadElements() {
+    public void loadElements() {
         List<Stock> elems = this.stockManager.getStocks();
         for (Stock current : elems) {
             listModel.addElement(current.toString());

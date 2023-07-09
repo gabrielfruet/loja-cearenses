@@ -36,4 +36,13 @@ public class Sale implements Serializable {
         return date;
     }
 
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "itemType=" + itemType +
+                ", amount=" + amount +
+                ", totalPrice=" + totalPrice +
+                ", date=" + date +
+                '}';
+    }
 }

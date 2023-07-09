@@ -37,6 +37,8 @@ public class SellerManager implements Serializable {
         for (Seller s : this.sellers) {
             if (seller.equals(s)) {
                 exists = true;
+                System.out.println(seller);
+                System.out.println(s);
                 break;
             }
         }
@@ -79,4 +81,6 @@ public class SellerManager implements Serializable {
     public Vector<BaseSeller> getSellers(){
         return sellers;
     }
+
+    public BaseSeller getByIndex(int index){return sellers.get(index);}
 }

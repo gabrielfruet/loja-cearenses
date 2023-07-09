@@ -38,8 +38,9 @@ public abstract class BaseSeller implements Seller, Serializable {
         }
 
         BigDecimal totalPrice = this.price(amount);
-        this.requester.credit(totalPrice);
         stock.decreaseAmount(amount);
+        this.requester.credit(totalPrice);
+
 
         return new Sale(
                 this.getItemType(),

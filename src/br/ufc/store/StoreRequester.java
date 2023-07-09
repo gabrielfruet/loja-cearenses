@@ -11,7 +11,8 @@ import java.util.Vector;
 public class StoreRequester implements Serializable {
     private Store store;
     private List<Request> requestQueue;
-    public StoreRequester(){
+    public StoreRequester(Store store){
+        this.store = store;
         this.requestQueue = new Vector<Request>();
     }
 
