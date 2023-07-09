@@ -163,11 +163,23 @@ public class Stock implements Serializable {
                 );
     }
 
+    public BigDecimal getBuyPrice() {
+        return buyPrice;
+    }
+
     @Override
     public String toString() {
         return "Estoque de " + itemType.toString()
                 + ", com quantidade atual de "
                 + this.amount + ", e preco de restoque "
                 + this.buyPrice.toString();
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public void setBuyPrice(BigDecimal buyPrice) {
+        this.buyPrice = buyPrice;
     }
 }
