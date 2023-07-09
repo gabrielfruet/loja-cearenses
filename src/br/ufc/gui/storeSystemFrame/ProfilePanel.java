@@ -35,6 +35,7 @@ public class ProfilePanel extends JPanel{
     }
     public void loadSales()
     {
+        listModel.clear();
         List<Sale> salesVector = vendorUser.getSales();
         for (Sale current : salesVector) {
             listModel.addElement(current.toString());
