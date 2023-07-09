@@ -79,9 +79,7 @@ public class CRUDItem extends CRUDAbstract<Item>
         }
     }
 
-
-    protected void loadElements()
-    {
+    protected void loadElements() {
         Optional<Vector<Item>> itemsOptional = itemManager.getItems();
         if(itemsOptional.isPresent()) {
             Vector<Item> items = itemsOptional.get();

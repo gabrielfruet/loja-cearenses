@@ -15,7 +15,6 @@ public class StoreRequester implements Serializable {
         this.store = store;
         this.requestQueue = new Vector<Request>();
     }
-
     public void credit(BigDecimal value){
         store.credit(value);
     }
@@ -31,13 +30,11 @@ public class StoreRequester implements Serializable {
         }
 
     }
-
     public void retryAll(){
         for(Request req : this.requestQueue){
             this.debit(req);
         }
     }
-
     public List<Request> getAllRequests(){
         return Collections.unmodifiableList(this.requestQueue);
     }

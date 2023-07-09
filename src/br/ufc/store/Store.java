@@ -22,9 +22,6 @@ public class Store implements Serializable {
     private VendorManager vendorManager;
     private VendorUser activeUser;
     private StoreRequester storeRequester;
-
-
-
     public Store(){
         cash = new BigDecimal(0);
         vendorManager = new VendorManager();

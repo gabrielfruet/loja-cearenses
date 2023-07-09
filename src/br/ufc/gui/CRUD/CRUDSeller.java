@@ -16,7 +16,6 @@ import java.awt.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Vector;
-
 public class CRUDSeller extends CRUDAbstract<Seller>{
 
     private StockManager stockManager;
