@@ -10,6 +10,7 @@ import br.ufc.stock.seller.exception.CreditRequestException;
 import br.ufc.stock.seller.exception.SellerNegativeAmountException;
 import br.ufc.store.StoreRequester;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -18,7 +19,7 @@ import java.time.LocalDate;
  *
  * @author Gabriel Fruet
  */
-public abstract class BaseSeller implements Seller {
+public abstract class BaseSeller implements Seller, Serializable {
     protected Stock stock;
     protected BigDecimal price;
     protected StoreRequester requester;
@@ -37,8 +38,9 @@ public abstract class BaseSeller implements Seller {
         }
 
         BigDecimal totalPrice = this.price(amount);
-        this.requester.credit(totalPrice);
         stock.decreaseAmount(amount);
+        this.requester.credit(totalPrice);
+
 
         return new Sale(
                 this.getItemType(),
@@ -66,4 +68,10 @@ public abstract class BaseSeller implements Seller {
     public boolean equals(Object o) {
         return ((Seller) o).getItemType().equals(this.getItemType());
     }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public abstract String toString();
 }

@@ -51,4 +51,8 @@ public class DiscountSeller extends BaseSeller implements Serializable {
         return this.price.multiply(new BigDecimal(amount))
                 .multiply(BigDecimal.ONE.add(discount));
     }
+
+    public String toString() {
+        return String.format("Seller com desconto do estoque de %s de preço base %s",stock.getItemName(),super.getPrice().toString());
+    }
 }

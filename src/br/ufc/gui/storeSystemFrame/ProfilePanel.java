@@ -1,19 +1,45 @@
 package br.ufc.gui.storeSystemFrame;
 
+import br.ufc.stock.Item;
+import br.ufc.stock.sale.Sale;
+import br.ufc.user.VendorUser;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Optional;
+import java.util.Vector;
 
 public class ProfilePanel extends JPanel{
 
-    public ProfilePanel(){
+    protected final List<Sale> sales;
+    protected JList<String> salesList;
+    protected DefaultListModel<String> listModel;
+    VendorUser vendorUser;
+    JScrollPane scrollPane;
+
+
+    public ProfilePanel(VendorUser vendorUser){
+        this.vendorUser = vendorUser;
         this.setLayout(new BorderLayout());
 
-        JTextArea salesTextArea = new JTextArea();
-        salesTextArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(salesTextArea);
-        this.add(scrollPane, BorderLayout.CENTER);
+        sales = null;
+        listModel = new DefaultListModel<>();
+        salesList = new JList<>(listModel);
+
+
+        scrollPane = new JScrollPane(salesList);
+        add(scrollPane, BorderLayout.CENTER);
+    }
+    public void loadSales()
+    {
+        listModel.clear();
+        List<Sale> salesVector = vendorUser.getSales();
+        for (Sale current : salesVector) {
+            listModel.addElement(current.toString());
+        }
     }
 
 }

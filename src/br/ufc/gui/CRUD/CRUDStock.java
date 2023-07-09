@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Optional;
 
 public class CRUDStock extends CRUDAbstract<Seller>
 {
@@ -26,6 +27,7 @@ public class CRUDStock extends CRUDAbstract<Seller>
         this.stockManager = stockManager;
         this.itemManager = itemManager;
         this.storeRequester = storeRequester;
+        loadElements();
     }
 
     public void addElement(){
@@ -51,7 +53,7 @@ public class CRUDStock extends CRUDAbstract<Seller>
         panel.add(new JScrollPane(itemSelector));
 
         int option = JOptionPane.showOptionDialog(null, panel, "Criar Stock", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Login", "Cancelar"}, null);
+                JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Adicionar", "Cancelar"}, null);
 
         if (option == 0) {
             int amount = Integer.parseInt(quantidadeInicialField.getText());
@@ -73,9 +75,31 @@ public class CRUDStock extends CRUDAbstract<Seller>
         }
     }
     public void editElement(){
+        // Obtém o índice do produto selecionado na lista
+        int selectedIndex = elementList.getSelectedIndex();
 
+        if (selectedIndex != -1) {
+            // Obtém o produto selecionado
+            Optional<Stock> stockSearched = stockManager.getByIndex(selectedIndex);
+            Stock stock = stockSearched.get();
+            // Exibe as caixas de diálogo preenchidas com os dados do produto selecionado
+            String newAmount = JOptionPane.showInputDialog("Digite a nova quantidade do produto:", stock.getAmount());
+            String newBuyPrice = JOptionPane.showInputDialog("Digite o novo preço de restoque do item:", stock.getBuyPrice());
+
+            // Verifica se o usuário cancelou a entrada de dados
+            if (newAmount != null && newBuyPrice != null) {
+
+                // Atualiza os dados do produto
+                stock.setAmount(Integer.valueOf(newAmount));
+                stock.setBuyPrice(new BigDecimal(newBuyPrice));
+
+                // Atualiza o modelo da lista
+                listModel.set(selectedIndex, stock.toString());
+            }
+        }
     }
-    protected void loadElements() {
+    public void loadElements() {
+        listModel.clear();
         List<Stock> elems = this.stockManager.getStocks();
         for (Stock current : elems) {
             listModel.addElement(current.toString());

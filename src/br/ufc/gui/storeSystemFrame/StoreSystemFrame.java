@@ -1,16 +1,17 @@
 package br.ufc.gui.storeSystemFrame;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
 import br.ufc.gui.CRUD.CRUDItem;
+import br.ufc.gui.CRUD.CRUDSeller;
 import br.ufc.gui.CRUD.CRUDStock;
+import br.ufc.serializing.SaveStore;
 import br.ufc.store.Store;
 import com.sun.tools.javac.Main;
+
+import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StoreSystemFrame extends JFrame {
 
@@ -19,14 +20,14 @@ public class StoreSystemFrame extends JFrame {
     private JPanel itemPanel;
     private JPanel stockPanel;
     private JPanel sellerPanel;
-    private JPanel salePanel;
 
     private List<String> sales;
 
     private Store store;
 
-    public StoreSystemFrame(Store storeVar) {
-        store = storeVar;
+    public StoreSystemFrame(Store store) {
+
+        this.store = store;
         setTitle("Sistema de estoque");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -37,80 +38,63 @@ public class StoreSystemFrame extends JFrame {
         createMenuBar();
 
         mainPanel = new MainPanel();
-        profilePanel = new ProfilePanel();
+        profilePanel = new ProfilePanel(store.getActiveUser());
         itemPanel = new CRUDItem(store.getItemMananger());
         stockPanel = new CRUDStock(
                 store.getStockManager(),
                 store.getItemMananger(),
                 store.getStoreRequester()
         );
+        sellerPanel = new CRUDSeller(
+                store.getStockManager(),
+                store.getSellerManager(),
+                store.getStoreRequester()
+        );
 
         showMainPanel();
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                SaveStore.saveData(store);
+            }
+        });
     }
 
     private void createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
         JMenuItem itemMenu = new JMenuItem("Item");
-        itemMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showItemPanel();
-            }
-        });
+        itemMenu.addActionListener(e -> showItemPanel());
         menuBar.add(itemMenu);
 
         JMenuItem stockMenu = new JMenuItem("Stock");
-        stockMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showStockPanel();
-            }
-        });
+        stockMenu.addActionListener(e -> showStockPanel());
         menuBar.add(stockMenu);
 
         JMenuItem sellerMenu = new JMenuItem("Seller");
-        sellerMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Ação executada ao clicar em "Seller"
-                JOptionPane.showMessageDialog(null, "Seller selecionado");
-            }
-        });
+        sellerMenu.addActionListener(e -> showSellerPanel());
         menuBar.add(sellerMenu);
 
         JMenuItem salesMenu = new JMenuItem("Sales");
-        salesMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Ação executada ao clicar em "Sales"
-                JOptionPane.showMessageDialog(null, "Sales selecionado");
-            }
+        salesMenu.addActionListener(e -> {
+            new SaleDialog(store.getSellerManager(),store.getActiveUser());
         });
         menuBar.add(salesMenu);
 
         JMenuItem profileMenu = new JMenuItem("Profile");
-        profileMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showProfilePanel();
-            }
-        });
+        profileMenu.addActionListener(e -> showProfilePanel());
         menuBar.add(profileMenu);
 
         JMenuItem menuMenu = new JMenuItem("Menu");
-        menuMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showMainPanel();
-            }
-        });
+        menuMenu.addActionListener(e -> showMainPanel());
         menuBar.add(menuMenu);
 
         setJMenuBar(menuBar);
     }
 
     public void showMainPanel() {
+        ((MainPanel)mainPanel).updateTotalRevenueLabel(store.getCash());
         setContentPane(mainPanel);
         validate();
         repaint();
@@ -123,11 +107,18 @@ public class StoreSystemFrame extends JFrame {
     }
 
     private void showStockPanel() {
+        ((CRUDStock)stockPanel).loadElements();
        setContentPane(stockPanel);
        validate();
        repaint();
     }
+    private void showSellerPanel() {
+        setContentPane(sellerPanel);
+        validate();
+        repaint();
+    }
     private void showProfilePanel() {
+        ((ProfilePanel)profilePanel).loadSales();
         setContentPane(profilePanel);
         validate();
         repaint();

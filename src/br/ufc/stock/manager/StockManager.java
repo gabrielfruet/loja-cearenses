@@ -81,8 +81,11 @@ public class StockManager implements Serializable {
      *
      * @author fruet
      */
-    public List<Stock> getStocks() {
-        return new Vector<Stock>(stocksVector);
+    public Vector<Stock> getStocks() {
+        return stocksVector;
+    }
+    public Optional<Stock> getByIndex(int index){
+        return Optional.ofNullable(stocksVector.get(index));
     }
 }
 

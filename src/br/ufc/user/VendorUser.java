@@ -4,6 +4,7 @@ import br.ufc.stock.sale.Sale;
 import br.ufc.stock.sale.manager.SaleManager;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class VendorUser implements Serializable {
     private SaleManager saleManager;
@@ -25,5 +26,6 @@ public class VendorUser implements Serializable {
     public void registerSale(Sale sale){
         saleManager.register(sale);
     }
+    public List<Sale> getSales(){return saleManager.getSales();}
 
 }

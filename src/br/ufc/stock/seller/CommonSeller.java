@@ -42,4 +42,9 @@ public class CommonSeller extends BaseSeller implements Serializable {
                 new BigDecimal(amount)
         );
     }
+
+    @Override
+    public String toString() {
+        return String.format("Seller do estoque de %s de preço base %s",stock.getItemName(),super.getPrice().toString());
+    }
 }

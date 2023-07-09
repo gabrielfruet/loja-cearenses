@@ -36,7 +36,7 @@ public class CRUDItem extends CRUDAbstract<Item>
         panel.add(descItemField);
 
         int option = JOptionPane.showOptionDialog(null, panel, "Criar Item", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Login", "Cancelar"}, null);
+                JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Adicionar", "Cancelar"}, null);
 
         if (option == 0) {
             String name = nameItemField.getText();
