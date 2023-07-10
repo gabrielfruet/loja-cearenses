@@ -17,7 +17,6 @@ public class Item implements Serializable {
 
     public boolean equals(Object o){
         return this==o;
-        //return ((Item)o).getId().equals(this.id);
     }
 
     public void setName(String name) {

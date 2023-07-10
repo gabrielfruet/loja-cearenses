@@ -25,9 +25,6 @@ public class SellerManager implements Serializable {
 
             if (seller.equals(s)) {
                 exists = true;
-                System.out.println(s.getItemType());
-                System.out.println(seller.getItemType());
-                System.out.println("\n");
                 break;
             }
         }

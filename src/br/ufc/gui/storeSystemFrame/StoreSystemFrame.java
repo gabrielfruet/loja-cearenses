@@ -6,11 +6,9 @@ import br.ufc.gui.CRUD.CRUDStock;
 import br.ufc.gui.exception.ExceptionDialog;
 import br.ufc.serializing.SaveStore;
 import br.ufc.store.Store;
-import com.sun.tools.javac.Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;

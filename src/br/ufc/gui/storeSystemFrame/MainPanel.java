@@ -2,15 +2,10 @@ package br.ufc.gui.storeSystemFrame;
 
 import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.MoneyConverter;
-import br.ufc.store.Store;
 
 import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Optional;
 
 public class MainPanel extends JPanel{

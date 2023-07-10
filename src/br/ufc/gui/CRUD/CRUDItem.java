@@ -1,10 +1,8 @@
 package br.ufc.gui.CRUD;
 
 import br.ufc.gui.exception.ExceptionDialog;
-import br.ufc.gui.login.TelaLoginCadastro;
 import br.ufc.stock.Item;
 import br.ufc.stock.ItemManager;
-import br.ufc.user.VendorUser;
 
 import javax.swing.*;
 import java.awt.*;

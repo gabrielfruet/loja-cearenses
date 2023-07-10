@@ -1,14 +1,10 @@
 package br.ufc.gui.storeSystemFrame;
 
 import br.ufc.gui.exception.ExceptionDialog;
-import br.ufc.gui.login.TelaLoginCadastro;
 import br.ufc.store.Store;
-import br.ufc.user.VendorManager;
-import br.ufc.user.VendorUser;
 
 import javax.swing.*;
 import java.math.BigDecimal;
-import java.util.Optional;
 
 public class StoreStarterMoneyDialog {
     public static Store showStoreStarterMoneyDialog() {

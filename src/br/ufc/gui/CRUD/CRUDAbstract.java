@@ -1,14 +1,9 @@
 package br.ufc.gui.CRUD;
 
-import br.ufc.gui.exception.ExceptionDialog;
-import br.ufc.gui.login.TelaLoginCadastro;
-import br.ufc.user.VendorUser;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Optional;
 import java.util.Vector;
 
 public abstract class CRUDAbstract<T> extends JPanel {

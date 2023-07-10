@@ -1,9 +1,6 @@
 package br.ufc.store;
 
-import br.ufc.stock.Item;
 import br.ufc.stock.ItemManager;
-import br.ufc.stock.Stock;
-import br.ufc.stock.exception.NegativeAmountException;
 import br.ufc.stock.manager.StockManager;
 import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.manager.SellerManager;
@@ -14,9 +11,6 @@ import br.ufc.user.VendorUser;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
 
@@ -40,12 +34,6 @@ public class Store implements Serializable {
         stockManager = new StockManager();
         storeRequester = new StoreRequester(this);
         sellerManager = new SellerManager();
-        try{
-            vendorManager.register(new VendorUser("admin","admin"));
-        }
-        catch(Exception e){
-
-        }
     }
     public void setVendor(VendorUser user){
         activeUser = user;
@@ -73,13 +61,6 @@ public class Store implements Serializable {
         cash = cash.add(value);
     }
 
-    public void login(String username, String password) {
-
-    }
-
-    public void register(String username, String password) {
-
-    }
 
     public VendorUser getActiveUser() {
         return activeUser;
@@ -94,36 +75,6 @@ public class Store implements Serializable {
         if(sales.isEmpty())
             return Optional.ofNullable(null);
         return Optional.ofNullable(sales.lastElement());
-    }
-
-    public void createItem(String name, String descriptor) {
-
-    }
-
-
-    public List<Stock> getStocks() {
-        return null;
-    }
-
-    public void createSeller(Stock stock, BigDecimal price) {
-
-    }
-
-    public List<Item> getSellers() {
-        return null;
-    }
-
-    public void updateItem(String descriptor){
-
-    }
-
-    public List<Item> getItems(){
-
-        return null;
-    }
-
-    public void createStock(Item itemType, int amount, BigDecimal buyPrice, StoreRequester requester){
-
     }
 
     public StockManager getStockManager() {

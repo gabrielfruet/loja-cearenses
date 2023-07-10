@@ -1,12 +1,10 @@
 package br.ufc.gui.login;
 
-import javax.swing.*;
-import javax.swing.text.html.Option;
-
 import br.ufc.gui.exception.ExceptionDialog;
 import br.ufc.user.VendorManager;
 import br.ufc.user.VendorUser;
-import br.ufc.gui.login.TelaLoginCadastro;
+
+import javax.swing.*;
 import java.util.Optional;
 
 public class LoginDialog {
