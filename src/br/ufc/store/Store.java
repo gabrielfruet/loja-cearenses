@@ -3,14 +3,18 @@ package br.ufc.store;
 import br.ufc.stock.Item;
 import br.ufc.stock.ItemManager;
 import br.ufc.stock.Stock;
+import br.ufc.stock.exception.NegativeAmountException;
 import br.ufc.stock.manager.StockManager;
 import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.manager.SellerManager;
+import br.ufc.store.Exception.NegativeValueException;
+import br.ufc.store.Exception.NotEnoughCash;
 import br.ufc.user.VendorManager;
 import br.ufc.user.VendorUser;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,9 +32,9 @@ public class Store implements Serializable {
 
 
 
-    public Store(){
+    public Store(BigDecimal money){
         sales = new Vector<Sale>();
-        cash = new BigDecimal(0);
+        cash = money;
         vendorManager = new VendorManager();
         itemManager = new ItemManager();
         stockManager = new StockManager();
@@ -52,8 +56,17 @@ public class Store implements Serializable {
     public ItemManager getItemMananger(){
         return itemManager;
     }
-    public void debit(BigDecimal value) {
-        cash = cash.subtract(value);
+    public void debit(BigDecimal value) throws NegativeValueException,NotEnoughCash{
+        if(value.compareTo(BigDecimal.valueOf(0)) == -1){
+            throw new NegativeValueException();
+        }
+        else if(cash.compareTo(value)>=0){
+            cash = cash.subtract(value);
+        }
+        else{
+            throw new NotEnoughCash(value.subtract(cash));
+        }
+
     }
 
     public void credit(BigDecimal value) {

@@ -16,6 +16,8 @@ public abstract class CRUDAbstract<T> extends JPanel {
     protected JList<String> elementList;
     protected DefaultListModel<String> listModel;
 
+    protected JPanel buttonPanel;
+
     JScrollPane scrollPane;
 
     public CRUDAbstract() {
@@ -31,7 +33,7 @@ public abstract class CRUDAbstract<T> extends JPanel {
         JButton addButton = new JButton("Adicionar");
         JButton editButton = new JButton("Editar");
 
-        JPanel buttonPanel = new JPanel();
+        buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.add(addButton);
         buttonPanel.add(editButton);

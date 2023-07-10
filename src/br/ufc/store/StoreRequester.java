@@ -1,5 +1,6 @@
 package br.ufc.store;
 
+import br.ufc.gui.exception.ExceptionDialog;
 import br.ufc.stock.request.Request;
 
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class StoreRequester implements Serializable {
             request.conclude();
         }
         catch(Exception e){
+            new ExceptionDialog(e);
             request.decline();
             this.requestQueue.add(request);
         }

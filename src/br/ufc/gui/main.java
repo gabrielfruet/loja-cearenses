@@ -16,7 +16,6 @@ public class main {
 
         SaveStore.serialize(store);
     }
-
 }
 
 

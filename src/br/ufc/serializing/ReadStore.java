@@ -1,8 +1,10 @@
 package br.ufc.serializing;
 
+import br.ufc.gui.storeSystemFrame.StoreStarterMoneyDialog;
 import br.ufc.store.Store;
 
 import java.io.*;
+import java.math.BigDecimal;
 
 
 public class ReadStore {
@@ -20,7 +22,7 @@ public class ReadStore {
                 e.printStackTrace();
             }
         }
-
-        return new Store();
+        StoreStarterMoneyDialog starterMoneyDialog = new StoreStarterMoneyDialog();
+        return starterMoneyDialog.showStoreStarterMoneyDialog();
     }
 }

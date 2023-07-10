@@ -3,13 +3,18 @@ package br.ufc.gui.storeSystemFrame;
 import br.ufc.gui.CRUD.CRUDItem;
 import br.ufc.gui.CRUD.CRUDSeller;
 import br.ufc.gui.CRUD.CRUDStock;
+import br.ufc.gui.exception.ExceptionDialog;
 import br.ufc.serializing.SaveStore;
 import br.ufc.store.Store;
 import com.sun.tools.javac.Main;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +84,7 @@ public class StoreSystemFrame extends JFrame {
         JMenuItem salesMenu = new JMenuItem("Sales");
         salesMenu.addActionListener(e -> {
             new SaleDialog(store);
+            ((MainPanel)mainPanel).updateTotalRevenueLabel(store.getCash());
         });
         menuBar.add(salesMenu);
 
@@ -91,6 +97,13 @@ public class StoreSystemFrame extends JFrame {
         menuBar.add(menuMenu);
 
         setJMenuBar(menuBar);
+        try{
+            BufferedImage originalImage = ImageIO.read(new File("images/image.png"));
+            setIconImage(originalImage);
+        }
+        catch(Exception e){
+            new ExceptionDialog(e);
+        }
     }
 
     public void showMainPanel() {

@@ -2,6 +2,8 @@ package br.ufc.stock.seller.manager;
 
 import br.ufc.stock.Item;
 import br.ufc.stock.seller.BaseSeller;
+import br.ufc.stock.seller.CommonSeller;
+import br.ufc.stock.seller.DiscountSeller;
 import br.ufc.stock.seller.Seller;
 import br.ufc.stock.seller.manager.exception.ExistentSellerException;
 
@@ -18,11 +20,15 @@ public class SellerManager implements Serializable {
 
     public void register(BaseSeller seller) throws ExistentSellerException {
         boolean exists = false;
+
         for (Seller s : this.sellers) {
-            if (seller.equals(s)) {
+            boolean sameInstansce = (s instanceof CommonSeller && seller instanceof CommonSeller)
+                                    || (s instanceof DiscountSeller && seller instanceof DiscountSeller);
+            if (seller.equals(s) &&  sameInstansce) {
                 exists = true;
-                System.out.println(seller);
-                System.out.println(s);
+                System.out.println(s.getItemType());
+                System.out.println(seller.getItemType());
+                System.out.println("\n");
                 break;
             }
         }

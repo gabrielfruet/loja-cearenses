@@ -53,5 +53,9 @@ public abstract class BaseSeller implements Seller, Serializable {
         return price;
     }
 
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public abstract String toString();
 }

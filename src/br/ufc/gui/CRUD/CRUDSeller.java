@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.Vector;
 
 public class CRUDSeller extends CRUDAbstract<Seller>{
@@ -78,6 +79,20 @@ public class CRUDSeller extends CRUDAbstract<Seller>{
         }
     }
     public void editElement(){
+        // Obtém o índice do produto selecionado na lista
+        int selectedIndex = elementList.getSelectedIndex();
+
+        if (selectedIndex != -1) {
+            BaseSeller sellerSearched = sellerManager.getByIndex(selectedIndex);
+            String newPrice = JOptionPane.showInputDialog("Digite o novo preço do item:", sellerSearched.getPrice());
+
+            if (newPrice != null) {
+
+                sellerSearched.setPrice(new BigDecimal(newPrice));
+
+                listModel.set(selectedIndex, sellerSearched.toString());
+            }
+        }
 
     }
 
