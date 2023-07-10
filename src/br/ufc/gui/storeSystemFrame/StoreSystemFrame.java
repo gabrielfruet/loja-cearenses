@@ -78,7 +78,7 @@ public class StoreSystemFrame extends JFrame {
 
         JMenuItem salesMenu = new JMenuItem("Sales");
         salesMenu.addActionListener(e -> {
-            new SaleDialog(store.getSellerManager(),store.getActiveUser());
+            new SaleDialog(store);
         });
         menuBar.add(salesMenu);
 
@@ -94,6 +94,7 @@ public class StoreSystemFrame extends JFrame {
     }
 
     public void showMainPanel() {
+        ((MainPanel)mainPanel).updateLastSaleLabel(store.getLastTransaction());
         ((MainPanel)mainPanel).updateTotalRevenueLabel(store.getCash());
         setContentPane(mainPanel);
         validate();
