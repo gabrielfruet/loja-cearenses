@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 
 public class Request implements Serializable {
 
-    //Resolver se a request vai guardar a exceção
     private BigDecimal value;
     private Concludable concludable;
     private RequestStatus status;

@@ -14,24 +14,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-/**
- * An abstract base class for implementing sellers.
- *
- * @author Gabriel Fruet
- */
 public abstract class BaseSeller implements Seller, Serializable {
     protected Stock stock;
     protected BigDecimal price;
     protected StoreRequester requester;
 
-    /**
-     * Sells a specified amount of items.
-     *
-     * @param amount the amount of items to sell
-     * @return a Sale object representing the sale
-     * @throws SellerNegativeAmountException if the amount is negative
-     * @throws CreditRequestException        if the credit request is not concluded
-     */
     public Sale sell(int amount) throws SellerNegativeAmountException, NegativeAmountException, InsufficientAmountStockException {
         if (amount < 0) {
             throw new SellerNegativeAmountException(amount);
@@ -50,13 +37,6 @@ public abstract class BaseSeller implements Seller, Serializable {
         );
     }
 
-    /**
-     * Calculates the price for a specified amount of items.
-     *
-     * @param amount the amount of items
-     * @return the price for the specified amount of items
-     * @throws SellerNegativeAmountException if the amount is negative
-     */
     public abstract BigDecimal price(int amount) throws SellerNegativeAmountException;
 
     @Override
