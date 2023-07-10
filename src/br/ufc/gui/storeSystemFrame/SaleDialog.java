@@ -3,6 +3,7 @@ package br.ufc.gui.storeSystemFrame;
 import br.ufc.gui.exception.ExceptionDialog;
 import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.BaseSeller;
+import br.ufc.stock.seller.MoneyConverter;
 import br.ufc.stock.seller.Seller;
 import br.ufc.stock.seller.manager.SellerManager;
 import br.ufc.store.Store;
@@ -84,14 +85,12 @@ public class SaleDialog extends JPanel {
         int selectedIndex = sellerSelector.getSelectedIndex();
         try {
             int amount = Integer.parseInt(amountField.getText());
-            priceLabel.setText(selectedIndex!=-1 ? "Price: R$"+sellerManager.getByIndex(selectedIndex).price(amount).toString()
-                    : "Price: R$"+0);
+            priceLabel.setText(selectedIndex!=-1 ? "Price: "+ MoneyConverter.convertBigDecimal(sellerManager.getByIndex(selectedIndex).price(amount))
+                    : "Price: R$ 00,00");
         }catch (NumberFormatException e){
             priceLabel.setText("Price: R$ 00,00");
         }catch (Exception e){
             new ExceptionDialog(e);
         }
-
-
     }
 }

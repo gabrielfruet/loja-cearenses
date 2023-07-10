@@ -1,4 +1,4 @@
-package br.ufc.gui;
+package br.ufc;
 
 import br.ufc.gui.login.TelaLoginCadastro;
 
@@ -16,7 +16,6 @@ public class main {
 
         SaveStore.serialize(store);
     }
-
 }
 
 

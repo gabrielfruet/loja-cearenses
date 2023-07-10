@@ -1,20 +1,17 @@
 package br.ufc.gui.CRUD;
 
-import br.ufc.gui.exception.ExceptionDialog;
-import br.ufc.gui.login.TelaLoginCadastro;
-import br.ufc.user.VendorUser;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Optional;
 import java.util.Vector;
 
 public abstract class CRUDAbstract<T> extends JPanel {
     protected final Vector<T> elements;
     protected JList<String> elementList;
     protected DefaultListModel<String> listModel;
+
+    protected JPanel buttonPanel;
 
     JScrollPane scrollPane;
 
@@ -31,7 +28,7 @@ public abstract class CRUDAbstract<T> extends JPanel {
         JButton addButton = new JButton("Adicionar");
         JButton editButton = new JButton("Editar");
 
-        JPanel buttonPanel = new JPanel();
+        buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
         buttonPanel.add(addButton);
         buttonPanel.add(editButton);

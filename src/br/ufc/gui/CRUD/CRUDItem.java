@@ -1,13 +1,13 @@
 package br.ufc.gui.CRUD;
 
 import br.ufc.gui.exception.ExceptionDialog;
-import br.ufc.gui.login.TelaLoginCadastro;
 import br.ufc.stock.Item;
 import br.ufc.stock.ItemManager;
-import br.ufc.user.VendorUser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Optional;
 import java.util.Vector;
 
@@ -18,6 +18,14 @@ public class CRUDItem extends CRUDAbstract<Item>
         super();
         itemManager = items;
         add(new JLabel("CRUD Item"), BorderLayout.NORTH);
+        JButton deleteButton = new JButton("Deletar");
+        buttonPanel.add(deleteButton);
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteElement();
+            }
+        });
         loadElements();
     }
 
@@ -76,6 +84,13 @@ public class CRUDItem extends CRUDAbstract<Item>
                 // Atualiza o modelo da lista
                 listModel.set(selectedIndex, item.toString());
             }
+        }
+    }
+    public void deleteElement(){
+        int selectedIndex = elementList.getSelectedIndex();
+        if (selectedIndex != -1) {
+            itemManager.deleteByIndex(selectedIndex);
+            listModel.remove(selectedIndex);
         }
     }
 

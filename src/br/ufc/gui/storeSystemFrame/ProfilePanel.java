@@ -1,16 +1,11 @@
 package br.ufc.gui.storeSystemFrame;
 
-import br.ufc.stock.Item;
 import br.ufc.stock.sale.Sale;
 import br.ufc.user.VendorUser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Optional;
-import java.util.Vector;
 
 public class ProfilePanel extends JPanel{
 

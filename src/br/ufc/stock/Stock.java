@@ -15,6 +15,7 @@ import br.ufc.store.StoreRequester;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class Stock implements Serializable {
     private Item itemType;
@@ -105,10 +106,14 @@ public class Stock implements Serializable {
 
     @Override
     public String toString() {
+        BigDecimal formattedValue = buyPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        String valorString = decimalFormat.format(formattedValue);
+
         return "Estoque de " + itemType.toString()
                 + ", com quantidade atual de "
-                + this.amount + ", e preco de restoque "
-                + this.buyPrice.toString();
+                + this.amount + ", e preco de restoque R$ "
+                + valorString;
     }
 
     public void setAmount(int amount) {

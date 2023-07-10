@@ -1,15 +1,11 @@
 package br.ufc.gui.storeSystemFrame;
 
 import br.ufc.stock.sale.Sale;
-import br.ufc.store.Store;
+import br.ufc.stock.seller.MoneyConverter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Optional;
 
 public class MainPanel extends JPanel{
@@ -33,14 +29,11 @@ public class MainPanel extends JPanel{
         this.add(infoPanel, BorderLayout.CENTER);
     }
     public void updateTotalRevenueLabel(BigDecimal revenue){
-        totalRevenueLabel.setText("Saldo: R$"+revenue.toString());
+        totalRevenueLabel.setText("Saldo: R$"+ MoneyConverter.convertBigDecimal(revenue));
     }
     public void updateLastSaleLabel(Optional<Sale> optionalSale){
         if(optionalSale.isPresent()){
-            LocalDate SaleDate = optionalSale.get().getDate();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String dataFormatada = SaleDate.format(formatter);
-            lastSaleDateLabel.setText("Ultima venda: "+SaleDate);
+            lastSaleDateLabel.setText("Ultima venda: "+optionalSale.get());
         }
         else{
             lastSaleDateLabel.setText("Ultima venda:");

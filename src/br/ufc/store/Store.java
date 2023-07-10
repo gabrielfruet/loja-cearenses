@@ -1,18 +1,16 @@
 package br.ufc.store;
 
-import br.ufc.stock.Item;
 import br.ufc.stock.ItemManager;
-import br.ufc.stock.Stock;
 import br.ufc.stock.manager.StockManager;
 import br.ufc.stock.sale.Sale;
 import br.ufc.stock.seller.manager.SellerManager;
+import br.ufc.store.Exception.NegativeValueException;
+import br.ufc.store.Exception.NotEnoughCash;
 import br.ufc.user.VendorManager;
 import br.ufc.user.VendorUser;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
 
@@ -28,20 +26,14 @@ public class Store implements Serializable {
 
 
 
-    public Store(){
+    public Store(BigDecimal money){
         sales = new Vector<Sale>();
-        cash = new BigDecimal(0);
+        cash = money;
         vendorManager = new VendorManager();
         itemManager = new ItemManager();
         stockManager = new StockManager();
         storeRequester = new StoreRequester(this);
         sellerManager = new SellerManager();
-        try{
-            vendorManager.register(new VendorUser("admin","admin"));
-        }
-        catch(Exception e){
-
-        }
     }
     public void setVendor(VendorUser user){
         activeUser = user;
@@ -52,21 +44,23 @@ public class Store implements Serializable {
     public ItemManager getItemMananger(){
         return itemManager;
     }
-    public void debit(BigDecimal value) {
-        cash = cash.subtract(value);
+    public void debit(BigDecimal value) throws NegativeValueException,NotEnoughCash{
+        if(value.compareTo(BigDecimal.valueOf(0)) == -1){
+            throw new NegativeValueException();
+        }
+        else if(cash.compareTo(value)>=0){
+            cash = cash.subtract(value);
+        }
+        else{
+            throw new NotEnoughCash(value.subtract(cash));
+        }
+
     }
 
     public void credit(BigDecimal value) {
         cash = cash.add(value);
     }
 
-    public void login(String username, String password) {
-
-    }
-
-    public void register(String username, String password) {
-
-    }
 
     public VendorUser getActiveUser() {
         return activeUser;
@@ -81,36 +75,6 @@ public class Store implements Serializable {
         if(sales.isEmpty())
             return Optional.ofNullable(null);
         return Optional.ofNullable(sales.lastElement());
-    }
-
-    public void createItem(String name, String descriptor) {
-
-    }
-
-
-    public List<Stock> getStocks() {
-        return null;
-    }
-
-    public void createSeller(Stock stock, BigDecimal price) {
-
-    }
-
-    public List<Item> getSellers() {
-        return null;
-    }
-
-    public void updateItem(String descriptor){
-
-    }
-
-    public List<Item> getItems(){
-
-        return null;
-    }
-
-    public void createStock(Item itemType, int amount, BigDecimal buyPrice, StoreRequester requester){
-
     }
 
     public StockManager getStockManager() {

@@ -46,11 +46,16 @@ public abstract class BaseSeller implements Seller, Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return ((Seller) o).getItemType().equals(this.getItemType());
+        boolean sameInstansce = this.getClass().equals(o.getClass());
+        return ((Seller) o).getItemType().equals(this.getItemType()) && sameInstansce;
     }
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public abstract String toString();

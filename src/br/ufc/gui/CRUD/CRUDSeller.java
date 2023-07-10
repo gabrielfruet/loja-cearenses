@@ -1,7 +1,6 @@
 package br.ufc.gui.CRUD;
 
 import br.ufc.gui.exception.ExceptionDialog;
-import br.ufc.stock.Item;
 import br.ufc.stock.Stock;
 import br.ufc.stock.manager.StockManager;
 import br.ufc.stock.seller.BaseSeller;
@@ -15,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Vector;
 
 public class CRUDSeller extends CRUDAbstract<Seller>{
 
@@ -36,7 +34,7 @@ public class CRUDSeller extends CRUDAbstract<Seller>{
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel priceLabel = new JLabel("Price:");
+        JLabel priceLabel = new JLabel("Preço:");
         JTextField priceField = new JTextField();
 
         String[] options = {"Normal", "Desconto"};
@@ -78,6 +76,20 @@ public class CRUDSeller extends CRUDAbstract<Seller>{
         }
     }
     public void editElement(){
+        // Obtém o índice do produto selecionado na lista
+        int selectedIndex = elementList.getSelectedIndex();
+
+        if (selectedIndex != -1) {
+            BaseSeller sellerSearched = sellerManager.getByIndex(selectedIndex);
+            String newPrice = JOptionPane.showInputDialog("Digite o novo preço do item:", sellerSearched.getPrice());
+
+            if (newPrice != null) {
+
+                sellerSearched.setPrice(new BigDecimal(newPrice));
+
+                listModel.set(selectedIndex, sellerSearched.toString());
+            }
+        }
 
     }
 

@@ -8,6 +8,8 @@ import br.ufc.stock.manager.StockManager;
 import br.ufc.stock.seller.Seller;
 import br.ufc.store.StoreRequester;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -28,6 +30,14 @@ public class CRUDStock extends CRUDAbstract<Seller>
         this.itemManager = itemManager;
         this.storeRequester = storeRequester;
         loadElements();
+        JButton restockButton = new JButton("Reestocar");
+        buttonPanel.add(restockButton);
+        restockButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                restockElement();
+            }
+        });
     }
 
     public void addElement(){
@@ -83,17 +93,39 @@ public class CRUDStock extends CRUDAbstract<Seller>
             Optional<Stock> stockSearched = stockManager.getByIndex(selectedIndex);
             Stock stock = stockSearched.get();
             // Exibe as caixas de diálogo preenchidas com os dados do produto selecionado
-            String newAmount = JOptionPane.showInputDialog("Digite a nova quantidade do produto:", stock.getAmount());
             String newBuyPrice = JOptionPane.showInputDialog("Digite o novo preço de restoque do item:", stock.getBuyPrice());
 
             // Verifica se o usuário cancelou a entrada de dados
-            if (newAmount != null && newBuyPrice != null) {
+            if (newBuyPrice != null) {
 
                 // Atualiza os dados do produto
-                stock.setAmount(Integer.valueOf(newAmount));
                 stock.setBuyPrice(new BigDecimal(newBuyPrice));
 
                 // Atualiza o modelo da lista
+                listModel.set(selectedIndex, stock.toString());
+            }
+        }
+    }
+    public void restockElement(){
+        // Obtém o índice do produto selecionado na lista
+        int selectedIndex = elementList.getSelectedIndex();
+
+        if (selectedIndex != -1) {
+            // Obtém o produto selecionado
+            Optional<Stock> stockSearched = stockManager.getByIndex(selectedIndex);
+            Stock stock = stockSearched.get();
+            // Exibe as caixas de diálogo preenchidas com os dados do produto selecionado
+            String newAmount = JOptionPane.showInputDialog("Digite quanto será reestocado:", stock.getAmount());
+
+            // Verifica se o usuário cancelou a entrada de dados
+            if (newAmount != null) {
+
+                // Atualiza os dados do produto
+                try{
+                    stock.restock(Integer.valueOf(newAmount));
+                }catch(Exception e){
+                    new ExceptionDialog(e);
+                }
                 listModel.set(selectedIndex, stock.toString());
             }
         }

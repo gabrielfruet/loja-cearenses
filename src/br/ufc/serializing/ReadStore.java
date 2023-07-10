@@ -1,8 +1,12 @@
 package br.ufc.serializing;
 
+import br.ufc.gui.storeSystemFrame.StoreStarterMoneyDialog;
 import br.ufc.store.Store;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 
 public class ReadStore {
@@ -20,7 +24,7 @@ public class ReadStore {
                 e.printStackTrace();
             }
         }
-
-        return new Store();
+        StoreStarterMoneyDialog starterMoneyDialog = new StoreStarterMoneyDialog();
+        return starterMoneyDialog.showStoreStarterMoneyDialog();
     }
 }
