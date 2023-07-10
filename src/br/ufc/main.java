@@ -1,4 +1,4 @@
-package br.ufc.gui;
+package br.ufc;
 
 import br.ufc.gui.login.TelaLoginCadastro;
 
