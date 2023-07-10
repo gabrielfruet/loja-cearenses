@@ -55,4 +55,10 @@ public class ItemManager implements Serializable {
     public Optional<Item> getByIndex(int index){
         return Optional.ofNullable(items.get(index));
     }
+    public void deleteByIndex(int index){
+        Optional<Item> item = getByIndex(index);
+        if(item.isPresent()){
+            items.remove(item.get());
+        }
+    }
 }

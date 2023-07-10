@@ -22,9 +22,8 @@ public class SellerManager implements Serializable {
         boolean exists = false;
 
         for (Seller s : this.sellers) {
-            boolean sameInstansce = (s instanceof CommonSeller && seller instanceof CommonSeller)
-                                    || (s instanceof DiscountSeller && seller instanceof DiscountSeller);
-            if (seller.equals(s) &&  sameInstansce) {
+
+            if (seller.equals(s)) {
                 exists = true;
                 System.out.println(s.getItemType());
                 System.out.println(seller.getItemType());

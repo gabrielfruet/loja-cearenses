@@ -15,13 +15,13 @@ public class StoreStarterMoneyDialog {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel moneyLabel = new JLabel("Dinheiro inical:");
+        JLabel moneyLabel = new JLabel("Saldo inical:");
         JTextField moneyField = new JTextField();
 
         panel.add(moneyLabel);
         panel.add(moneyField);
 
-        int option = JOptionPane.showOptionDialog(null, panel, "Dinheiro inicial", JOptionPane.DEFAULT_OPTION,
+        int option = JOptionPane.showOptionDialog(null, panel, "Saldo inicial", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Iniciar"}, null);
 
         if (option == 0) {
